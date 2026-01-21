@@ -30,14 +30,14 @@ publish: build
 publish-test: build
 	uv run twine upload --repository testpypi dist/*
 
-.PHONY: version-major
-version-major:
+.PHONY: major
+major:
 	uv run bump2version major
 
-.PHONY: version-minor
-version-minor:
+.PHONY: minor
+minor:
 	uv run bump2version minor
 
-.PHONY: version-patch
-version-patch:
+.PHONY: patch
+patch:
 	uv run bump2version patch
