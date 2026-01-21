@@ -17,3 +17,27 @@ tests:
 
 .PHONY: ft
 ft: fmt tests
+
+.PHONY: build
+build:
+	uv run python -m build
+
+.PHONY: publish
+publish: build
+	uv run twine upload dist/*
+
+.PHONY: publish-test
+publish-test: build
+	uv run twine upload --repository testpypi dist/*
+
+.PHONY: version-major
+version-major:
+	uv run bump2version major
+
+.PHONY: version-minor
+version-minor:
+	uv run bump2version minor
+
+.PHONY: version-patch
+version-patch:
+	uv run bump2version patch
