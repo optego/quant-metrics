@@ -1,6 +1,7 @@
 """Example usage of quant_metrics package."""
 
 from pathlib import Path
+
 from quant_metrics import calculate_dsr_from_formula, calculate_risk_free_rate
 
 # Example: Calculate DSR for multiple strategies from a CSV file

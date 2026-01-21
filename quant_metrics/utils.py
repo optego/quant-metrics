@@ -273,7 +273,7 @@ def calculate_skewness(
             else:
                 # Calculate skewness: (n / ((n-1)(n-2))) * Σ((xi - mean) / std)^3
                 standardized = (returns_array - mean) / std_dev
-                skewness = (n / ((n - 1) * (n - 2))) * np.sum(standardized ** 3)
+                skewness = (n / ((n - 1) * (n - 2))) * np.sum(standardized**3)
                 calculated_skewness[strategy] = skewness
 
     return calculated_skewness
@@ -332,11 +332,11 @@ def calculate_kurtosis(
                 # Calculate excess kurtosis
                 # Formula: (n(n+1) / ((n-1)(n-2)(n-3))) * Σ((xi - mean) / std)^4 - 3(n-1)^2 / ((n-2)(n-3))
                 standardized = (returns_array - mean) / std_dev
-                sum_fourth_power = np.sum(standardized ** 4)
-                
+                sum_fourth_power = np.sum(standardized**4)
+
                 first_term = (n * (n + 1)) / ((n - 1) * (n - 2) * (n - 3))
                 second_term = 3 * (n - 1) ** 2 / ((n - 2) * (n - 3))
-                
+
                 kurtosis = first_term * sum_fourth_power - second_term
                 calculated_kurtosis[strategy] = kurtosis
 
@@ -409,7 +409,7 @@ def calculate_volatility_sharpe(
             kurt_val = kurtosis[strategy]
 
             # Calculate numerator: 1 - Skewness*Sharpe + (Kurtosis+2)/4*Sharpe^2
-            numerator = 1 - (skew_val * sharpe_val) + ((kurt_val + 2) / 4) * (sharpe_val ** 2)
+            numerator = 1 - (skew_val * sharpe_val) + ((kurt_val + 2) / 4) * (sharpe_val**2)
 
             # Calculate denominator: Sample size - 1
             denominator = n - 1
@@ -493,7 +493,7 @@ def calculate_sr_star(
 ) -> float:
     """
     Calculate SR* (Sharpe Ratio*) using the formula:
-    SR* = SQRT(Variance across trials) * ((1 - Euler-Mascheroni) * NORMSINV(1 - 1/Number of trials) + 
+    SR* = SQRT(Variance across trials) * ((1 - Euler-Mascheroni) * NORMSINV(1 - 1/Number of trials) +
           Euler-Mascheroni * NORMSINV(1 - 1/(Number of trials * EXP(1))))
 
     Parameters:
@@ -552,9 +552,7 @@ def calculate_sr_star(
     norms_inv2 = norm.ppf(prob2)  # NORMSINV(1 - 1/(Number of trials * EXP(1)))
 
     # Calculate SR*
-    sr_star = sqrt_variance * (
-        (1 - euler_mascheroni) * norms_inv1 + euler_mascheroni * norms_inv2
-    )
+    sr_star = sqrt_variance * ((1 - euler_mascheroni) * norms_inv1 + euler_mascheroni * norms_inv2)
 
     return sr_star
 
@@ -734,9 +732,7 @@ def calculate_dsr_from_formula(
     return calculated_dsr
 
 
-def calculate_risk_free_rate(
-    annual_rate: float = 4.0, periods_per_year: int = 12
-) -> float:
+def calculate_risk_free_rate(annual_rate: float = 4.0, periods_per_year: int = 12) -> float:
     """
     Calculate the periodic risk-free rate from an annual rate.
 
